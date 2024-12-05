@@ -33,6 +33,18 @@ def load_tasks_from_JSON():
             "todo": []
         }
 
+def print_tasks(tasks):
+    print("\nCurrent Tasks:")
+    print("-" * 40)
+    for category, task_list in tasks.items():
+        print(f"\n{category.replace('_', ' ').title()}:")
+        if task_list:
+            for task in task_list:
+                print(f" - {task}")
+        else:
+            print(" No tasks.")
+    print("-" * 40)
+
 
 def main():
     print("Welcome to Task Tracker")
@@ -55,6 +67,9 @@ def main():
     # Load existing tasks
     existing_tasks = load_tasks_from_JSON()
 
+    print("\nTasks before update:")
+    print_tasks(existing_tasks)
+
     # Add tasks to the appropriate categories
     if args.add_task:
         existing_tasks["add_task"].extend(args.add_task)
@@ -74,6 +89,9 @@ def main():
             for key in ["add_task", "completed", "in_progress", "todo"]:
                 if task in existing_tasks[key]:
                     existing_tasks[key].remove(task)
+                found = True
+            if not found:
+                print(f"Task '{task}' not found in any category.")
 
     # Remove from add if completed
     if args.completed:
@@ -82,14 +100,14 @@ def main():
                 if task in existing_tasks[key]:
                     existing_tasks[key].remove(task)
 
-            if task not in existing_tasks["completed"]:
-                existing_tasks["completed"].append(task)
+        existing_tasks["completed"] = list(set(existing_tasks["completed"]))
 
 
     # Save the updated tasks back to the JSON file
     save_inputs_to_JSON(existing_tasks)
 
-    print(f"Updated tasks: {existing_tasks}")
+    print("\--- Tasks after updates ---")
+    print_tasks(existing_tasks)
 
 
 if __name__ == "__main__":
