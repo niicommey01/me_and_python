@@ -8,7 +8,7 @@ A command-line task tracker that helps you manage tasks by adding, deleting, mar
 - Mark tasks as completed or in progress
 - Saves tasks to a JSON file for persistence
 
-## There are other projects you can check out too😉
+# There are other projects you can check out too😉
 
 ## Installation
 1. Clone the repository:
