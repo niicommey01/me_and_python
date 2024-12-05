@@ -2,6 +2,30 @@ import argparse
 import json
 from textwrap import indent
 
+
+#store inputs to a JSON file
+def save_inputs_to_JSON(tasks):
+    with open("tasktrackerJSON.json", "w") as file:
+        json.dump(tasks, file, indent=4)
+
+#load tasks from JSON file
+def load_tasks_from_JSON():
+    try:
+        with open("tasktrackerJSON.json", "r") as file:
+            tasks = json.load(file)
+            return tasks
+    except FileNotFoundError:
+        print("No existing file found. Starting fresh!")
+        return{}
+    except json.JSONDecodeError:
+        print("Error reading the JSON file. It may be corrupted. Starting fresh!")
+        return {}
+
+
+def main():
+    print("Welcome to Task Tracker")
+
+
 #define arguments
 parser = argparse.ArgumentParser (description= "A task tracker")
 parser.add_argument("-a", "--add_task", type = str, nargs = "*",
@@ -35,23 +59,6 @@ tasks ={
     "todo": args.todo or []
 }
 
-#store inputs to a JSON file
-def save_inputs_to_JSON(tasks):
-    with open("tasktrackerJSON.json", "w") as file:
-        json.dump(tasks, file, indent=4)
-
-#load tasks from JSON file
-def load_tasks_from_JSON():
-    try:
-        with open("tasktrackerJSON.json", "r") as file:
-            tasks = json.load(file)
-            return tasks
-    except FileNotFoundError:
-        print("No existing file found. Starting fresh!")
-        return{}
-    except json.JSONDecodeError:
-        print("Error reading the JSON file. It may be corrupted. Starting fresh!")
-        return {}
 
 #load existing tasks
 existing_tasks = load_tasks_from_JSON()
@@ -73,3 +80,6 @@ for task in existing_tasks["delete_task"]:
 existing_tasks["delete_task"].clear()
 
 save_inputs_to_JSON(existing_tasks)
+
+if __name__ == "__main__":
+    main()

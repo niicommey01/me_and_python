@@ -1,0 +1,6 @@
+setup.py
+tasktracker.egg-info/PKG-INFO
+tasktracker.egg-info/SOURCES.txt
+tasktracker.egg-info/dependency_links.txt
+tasktracker.egg-info/entry_points.txt
+tasktracker.egg-info/top_level.txt

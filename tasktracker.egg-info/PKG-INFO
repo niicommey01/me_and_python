@@ -1,0 +1,11 @@
+Metadata-Version: 2.1
+Name: tasktracker
+Version: 1.0
+Summary: A simple task tracking CLI tool
+Home-page: https://github.com/niicommey01/task-tracker
+Author: Nii Commey
+Author-email: jude.niicommey@outlook.com
+Classifier: Programming Language :: Python :: 3.12
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
